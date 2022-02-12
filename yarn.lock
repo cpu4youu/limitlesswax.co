@@ -1790,7 +1790,7 @@
 
 "@deraxyna/ual-wax@https://github.com/deraXyna/ual-wax":
   version "1.6.0"
-  resolved "https://github.com/deraXyna/ual-wax#80ed449815533c2d2271e5b91290980e2980acbe"
+  resolved "https://github.com/deraXyna/ual-wax#26dd2f66177ed8420f22040e09f4c5f0acfb8d56"
   dependencies:
     "@waxio/waxjs" "^1.0.4"
     eosjs "^22.1.0"

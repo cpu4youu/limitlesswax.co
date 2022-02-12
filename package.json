@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@deraxyna/ual-wax": "git+https://github.com/deraXyna/ual-wax.git",
+    "@deraxyna/ual-wax": "https://github.com/deraXyna/ual-wax",
     "@eosdacio/ual-wax": "^1.5.1",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^11.1.0",

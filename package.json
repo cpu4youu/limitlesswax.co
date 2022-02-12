@@ -27,7 +27,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && mv build docs && cp CNAME docs",
+    "build": "rm -fr docs && react-scripts build && mv build docs && cp CNAME docs",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

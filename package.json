@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@deraxyna/ual-wax": "https://github.com/deraXyna/ual-wax",
+    "@deraxyna/ual-wax": "git+https://github.com/deraXyna/ual-wax.git",
     "@eosdacio/ual-wax": "^1.5.1",
-    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "cors": "^2.8.5",
@@ -15,10 +15,10 @@
     "react-icons": "^4.3.1",
     "react-router-dom": "^6.2.1",
     "react-scripts": "4.0.3",
-    "semantic-ui-react": "^2.0.3",
-    "styled-components": "^5.3.0",
+    "semantic-ui-react": "^2.1.1",
+    "styled-components": "^5.3.3",
     "typescript": "^4.5.5",
-    "ual-anchor": "^1.0.6",
+    "ual-anchor": "^1.1.4",
     "ual-ledger": "^0.3.0",
     "ual-reactjs-renderer": "^0.3.1",
     "util": "^0.12.4",
@@ -27,7 +27,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && mv build docs || move build docs",
+    "build": "rm -fr docs && react-scripts build && mv build docs && cp CNAME docs",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -51,6 +51,6 @@
     ]
   },
   "devDependencies": {
-    "@types/react": "^17.0.38"
+    "@types/react": "^17.0.39"
   }
 }

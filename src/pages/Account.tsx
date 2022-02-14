@@ -1,6 +1,8 @@
 import React from "react";
 import { JsonRpc } from "eosjs";
 import { Transaction, Action } from "../types";
+// import fetch from "node-fetch";
+// const rpc = new JsonRpc("https://wax.greymass.com", { fetch });
 
 //@ts-ignore
 const Account = ({ ual }) => {
@@ -64,7 +66,7 @@ const Account = ({ ual }) => {
     const multiplier = 1;
     var realCost = 0.01;
     try {
-      const table = await ual.rpc.get_table_rows({
+      const table = await ual.activeUser.rpc.get_table_rows({
         json: true, // Get the response as json
         code: "limitlesswax", // Contract that we target
         scope: "limitlesswax", // Account that owns the data

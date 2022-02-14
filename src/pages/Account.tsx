@@ -76,11 +76,11 @@ const Account = ({ ual }) => {
         show_payer: false, // Optional: Show ram payer
       });
 
-      console.log(table.rows[0]);
+      // console.log(table.rows[0]);
       realCost = parseFloat(table.rows[0].cost) * multiplier;
-      console.log(realCost);
+      // console.log(realCost);
 
-      console.log(demoTransaction(realCost, multiplier));
+      // console.log(demoTransaction(realCost, multiplier));
       const response = await ual.activeUser.signTransaction(
         demoTransaction(realCost, multiplier),
         {

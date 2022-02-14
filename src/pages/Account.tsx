@@ -92,6 +92,7 @@ const Account = ({ ual }) => {
       console.log("Sucess", response);
     } catch (e) {
       console.log("Error", e);
+      console.log("JSON", JSON.stringify(e));
     }
   };
 

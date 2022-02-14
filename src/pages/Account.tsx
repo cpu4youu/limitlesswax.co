@@ -1,13 +1,12 @@
-import React from 'react';
-import { JsonRpc } from 'eosjs'
-
+import React from "react";
+import { JsonRpc } from "eosjs";
 
 //@ts-ignore
-const Account = ({ ual}) => {
-  const multiplier = 0.01000000;
-  var realCost =  multiplier;
+const Account = ({ ual }) => {
+  const multiplier = 0.01;
+  var realCost = multiplier;
   const demoTransaction = {
-    actions:[
+    actions: [
       {
         account: "limitlesswax",
         name: "paycpu",
@@ -53,37 +52,37 @@ const Account = ({ ual}) => {
           },
         ],
       },
-    ]
-  }
- const limitlesswax = async() => {
+    ],
+  };
+  const limitlesswax = async () => {
     try {
+      console.log(demoTransaction);
       const response = await ual.activeUser.signTransaction(demoTransaction, {
         broadcast: true,
         blocksBehind: 3,
         expireSeconds: 60,
-      })
-      console.log(response)
-    } catch(e) {
-      console.log(e)
+      });
+      console.log(response);
+    } catch (e) {
+      console.log(e);
     }
- }
+  };
 
   return (
     <div
       style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '90vh'
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "90vh",
       }}
     >
-      {(!ual.activeUser) ? (
+      {!ual.activeUser ? (
         <h1>"Not logged in"</h1>
       ) : (
         <h1>{ual.activeUser.accountName}</h1>
       )}
       <button onClick={limitlesswax}>Test</button>
-
     </div>
   );
 };

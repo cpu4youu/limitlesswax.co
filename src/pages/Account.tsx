@@ -64,7 +64,7 @@ const Account = ({ ual }) => {
     const multiplier = 1;
     var realCost = 0.01;
     try {
-      const table = await ual.api.rpc.get_table_rows({
+      const table = await ual.rpc.get_table_rows({
         json: true, // Get the response as json
         code: "limitlesswax", // Contract that we target
         scope: "limitlesswax", // Account that owns the data

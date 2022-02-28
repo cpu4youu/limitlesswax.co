@@ -253,7 +253,7 @@ const Account = ({ ual }) => {
         json: true, // Get the response as json
         code: "limitlesscvt", // Contract that we target
         scope: "limitlesscvt", // Account that owns the data
-        table: "tokens", // Table name
+        table: "token", // Table name
         lower_bound: symbol,
         upper_bound: symbol,
         limit: 1, // Maximum number of rows that we want to get
@@ -360,7 +360,7 @@ const Account = ({ ual }) => {
         json: true, // Get the response as json
         code: "limitlesscvt", // Contract that we target
         scope: "limitlesscvt", // Account that owns the data
-        table: "tokens", // Table name
+        table: "token", // Table name
         lower_bound: symbol,
         upper_bound: symbol,
         limit: 1, // Maximum number of rows that we want to get
@@ -478,7 +478,7 @@ const Account = ({ ual }) => {
         json: true, // Get the response as json
         code: "limitlesscvt", // Contract that we target
         scope: "limitlesscvt", // Account that owns the data
-        table: "tokens", // Table name
+        table: "token", // Table name
         lower_bound: symbol,
         upper_bound: symbol,
         limit: 1, // Maximum number of rows that we want to get

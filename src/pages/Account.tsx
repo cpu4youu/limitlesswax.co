@@ -262,7 +262,7 @@ const Account = ({ ual }) => {
       });
 
       console.log(table.rows[0]);
-      realCost = parseFloat(table.rows[0].cost) * multiplier;
+      realCost = parseFloat(table.rows[0].price) * multiplier;
       console.log(realCost);
       console.log(realCost.toFixed(symbol_decimals) + symbol_string);
 

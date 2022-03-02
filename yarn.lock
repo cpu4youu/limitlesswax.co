@@ -1788,9 +1788,21 @@
   resolved "https://registry.npmjs.org/@csstools/normalize.css/-/normalize.css-10.1.0.tgz"
   integrity sha512-ij4wRiunFfaJxjB0BdrYHIH8FxBJpOwNPhhAcunlmPdXudL1WQV1qoP9un6JsEBAgQH+7UXyyjh0g7jTxXK6tg==
 
-"@deraxyna/ual-wax@https://github.com/deraXyna/ual-wax":
+"@deraxyna/ual-anchor@git+https://github.com/deraXyna/ual-anchor.git", "ual-anchor@git+https://github.com/deraXyna/ual-anchor.git":
+  version "1.1.4"
+  resolved "git+https://github.com/deraXyna/ual-anchor.git#cacb20445daa450a46611a2fd90baf26ec6cff04"
+  dependencies:
+    "@greymass/eosio" "^0.5.2"
+    anchor-link "^3.3.4"
+    anchor-link-browser-transport "^3.2.5"
+    elliptic "6.5.4"
+    eosio-signing-request "^2.3.1"
+    eosjs "^21.0.3"
+    universal-authenticator-library "0.3.0"
+
+"@deraxyna/ual-wax@git+https://github.com/deraXyna/ual-wax.git":
   version "1.6.0"
-  resolved "https://github.com/deraXyna/ual-wax#b3ae9798b88121ca2e8af6b693876429456c9cdb"
+  resolved "git+https://github.com/deraXyna/ual-wax.git#c07ddedc025361d5e06d34516039207d92b7922e"
   dependencies:
     "@waxio/waxjs" "^1.0.4"
     eosjs "^22.1.0"
@@ -2518,6 +2530,13 @@
   version "3.0.3"
   resolved "https://registry.npmjs.org/@types/minimatch/-/minimatch-3.0.3.tgz"
   integrity sha512-tHq6qdbT9U1IRSGf14CL0pUlULksvY9OZ+5eEgl1N7t+OA3tGvNpxJCzuKQlsNgCVwbAs670L1vcVQi8j9HjnA==
+
+"@types/node-fetch@^3.0.3":
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/@types/node-fetch/-/node-fetch-3.0.3.tgz#9d969c9a748e841554a40ee435d26e53fa3ee899"
+  integrity sha512-HhggYPH5N+AQe/OmN6fmhKmRRt2XuNJow+R3pQwJxOOF9GuwM7O2mheyGeIrs5MOIeNjDEdgdoyHBOrFeJBR3g==
+  dependencies:
+    node-fetch "*"
 
 "@types/node@*":
   version "14.14.31"
@@ -4846,6 +4865,11 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
+data-uri-to-buffer@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/data-uri-to-buffer/-/data-uri-to-buffer-4.0.0.tgz#b5db46aea50f6176428ac05b73be39a57701a64b"
+  integrity sha512-Vr3mLBA8qWmcuschSLAOogKgQ/Jwxulv3RNE4FXnYWRGujzrRWQI4m12fQqRkwX06C0KanhLr4hK+GydchZsaA==
+
 data-urls@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/data-urls/-/data-urls-2.0.0.tgz"
@@ -6019,6 +6043,14 @@ fb-watchman@^2.0.0:
   dependencies:
     bser "2.1.1"
 
+fetch-blob@^3.1.2, fetch-blob@^3.1.4:
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/fetch-blob/-/fetch-blob-3.1.4.tgz#e8c6567f80ad7fc22fd302e7dcb72bafde9c1717"
+  integrity sha512-Eq5Xv5+VlSrYWEqKrusxY1C3Hm/hjeAsCGVG3ft7pZahlUAChpGZT/Ms1WmSLnEAisEXszjzu/s+ce6HZB2VHA==
+  dependencies:
+    node-domexception "^1.0.0"
+    web-streams-polyfill "^3.0.3"
+
 fetch-ponyfill@^7.1.0:
   version "7.1.0"
   resolved "https://registry.npmjs.org/fetch-ponyfill/-/fetch-ponyfill-7.1.0.tgz"
@@ -6193,6 +6225,13 @@ form-data@~2.3.2:
     asynckit "^0.4.0"
     combined-stream "^1.0.6"
     mime-types "^2.1.12"
+
+formdata-polyfill@^4.0.10:
+  version "4.0.10"
+  resolved "https://registry.yarnpkg.com/formdata-polyfill/-/formdata-polyfill-4.0.10.tgz#24807c31c9d402e002ab3d8c720144ceb8848423"
+  integrity sha512-buewHzMvYL29jdeQTVILecSaZKnt/RJWjoZCF5OW60Z67/GmSLBkOFM7qh1PI3zFNtJbaZL5eQu1vLfazOwj4g==
+  dependencies:
+    fetch-blob "^3.1.2"
 
 forwarded@~0.1.2:
   version "0.1.2"
@@ -8681,6 +8720,20 @@ no-case@^3.0.4:
   dependencies:
     lower-case "^2.0.2"
     tslib "^2.0.3"
+
+node-domexception@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/node-domexception/-/node-domexception-1.0.0.tgz#6888db46a1f71c0b76b3f7555016b63fe64766e5"
+  integrity sha512-/jKZoMpw0F8GRwl4/eLROPA3cfcXtLApP0QzLmUT/HuPCZWyB7IY9ZrMeKw2O/nFIqPQB3PVM9aYm0F312AXDQ==
+
+node-fetch@*, node-fetch@^3.2.0:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-3.2.1.tgz#002177382810cfb77858857f69a3621a86c45f26"
+  integrity sha512-Ef3SPFtRWFCDyhvcwCSvacLpkwmYZcD57mmZzAsMiks9TpHpIghe32U9H06tMICnr+X7YCpzH7WvUlUoml2urA==
+  dependencies:
+    data-uri-to-buffer "^4.0.0"
+    fetch-blob "^3.1.4"
+    formdata-polyfill "^4.0.10"
 
 node-fetch@~2.6.1:
   version "2.6.1"
@@ -12192,19 +12245,6 @@ u2f-api@0.2.7:
   resolved "https://registry.npmjs.org/u2f-api/-/u2f-api-0.2.7.tgz"
   integrity sha512-fqLNg8vpvLOD5J/z4B6wpPg4Lvowz1nJ9xdHcCzdUPKcFE/qNCceV2gNZxSJd5vhAZemHr/K/hbzVA0zxB5mkg==
 
-ual-anchor@^1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/ual-anchor/-/ual-anchor-1.1.4.tgz#bb5382ae1695bbf381fd66c531f12a572ef7ffcc"
-  integrity sha512-5mE/hOxCDwx4GF5as7c4NOwKnk8eIdVxD7LShLMXcAgSUqiC/cBoXBPplcneV19kKCAYueudp9OSQzkqMVxvbQ==
-  dependencies:
-    "@greymass/eosio" "^0.5.2"
-    anchor-link "^3.3.4"
-    anchor-link-browser-transport "^3.2.5"
-    elliptic "6.5.4"
-    eosio-signing-request "^2.3.1"
-    eosjs "^21.0.3"
-    universal-authenticator-library "0.3.0"
-
 ual-ledger@^0.3.0:
   version "0.3.0"
   resolved "https://registry.npmjs.org/ual-ledger/-/ual-ledger-0.3.0.tgz"
@@ -12550,6 +12590,11 @@ wbuf@^1.1.0, wbuf@^1.7.3:
   integrity sha512-O84QOnr0icsbFGLS0O3bI5FswxzRr8/gHwWkDlQFskhSPryQXvrTMxjxGP4+iWYoauLoBvfDpkrOauZ+0iZpDA==
   dependencies:
     minimalistic-assert "^1.0.0"
+
+web-streams-polyfill@^3.0.3:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/web-streams-polyfill/-/web-streams-polyfill-3.2.0.tgz#a6b74026b38e4885869fb5c589e90b95ccfc7965"
+  integrity sha512-EqPmREeOzttaLRm5HS7io98goBgZ7IVz79aDvqjD0kYXLtFZTc0T/U6wHTPKyIjb+MdN7DFIIX6hgdBEpWmfPA==
 
 web-vitals@^1.0.1:
   version "1.1.2"

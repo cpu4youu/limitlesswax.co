@@ -242,7 +242,7 @@ const Account = ({ ual }) => {
     };
   };
   const user_token = async () => {
-    const multiplier = 1;
+    const multiplier = 1.0;
     var realCost = 0.01;
     var symbol = "0,SNAKOIL";
     var symbol_string = " SNAKOIL";
@@ -261,7 +261,7 @@ const Account = ({ ual }) => {
         show_payer: false, // Optional: Show ram payer
       });
 
-      // console.log(table.rows[0]);
+      console.log(table.rows[0]);
       realCost = parseFloat(table.rows[0].cost) * multiplier;
       console.log(realCost);
       console.log(realCost.toFixed(symbol_decimals) + symbol_string);

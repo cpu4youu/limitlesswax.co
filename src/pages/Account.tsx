@@ -476,6 +476,11 @@ const Account = ({ ual }) => {
     var contract = "novarallytok";
     try {
       console.log("ual: ", ual);
+      if (ual.activeAuthenticator.wax) {
+        console.log("Yes a wcw user");
+      } else {
+        console.log("Not a wcw user");
+      }
       const table = await ual.activeUser.rpc.get_table_rows({
         json: true, // Get the response as json
         code: "limitlesscvt", // Contract that we target

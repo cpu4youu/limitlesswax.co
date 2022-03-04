@@ -370,7 +370,7 @@ const Account = ({ ual }) => {
       });
 
       // console.log(table.rows[0]);
-      realCost = parseFloat(table.rows[0].cost) * multiplier;
+      realCost = parseFloat(table.rows[0].price) * multiplier;
       // console.log(realCost);
 
       console.log(
@@ -475,6 +475,7 @@ const Account = ({ ual }) => {
     var symbol_decimals = 0;
     var contract = "novarallytok";
     try {
+      console.log("ual: ", ual);
       const table = await ual.activeUser.rpc.get_table_rows({
         json: true, // Get the response as json
         code: "limitlesscvt", // Contract that we target
@@ -488,7 +489,7 @@ const Account = ({ ual }) => {
       });
 
       // console.log(table.rows[0]);
-      realCost = parseFloat(table.rows[0].cost) * multiplier;
+      realCost = parseFloat(table.rows[0].price) * multiplier;
       // console.log(realCost);
 
       console.log(

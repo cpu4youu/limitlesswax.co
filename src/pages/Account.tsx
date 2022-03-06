@@ -102,36 +102,36 @@ const Account = ({ ual }) => {
       max_cpu_usage_ms: multiplier,
       max_net_usage_words: multiplier * 1000,
       actions: [
-        {
-          account: "limitlesswax",
-          name: "paycpu",
-          data: {
-            user: ual.activeUser.accountName,
-            info: multiplier + " ms max",
-          },
-          authorization: [
-            {
-              actor: "limitlesswax",
-              permission: "cosign",
-            },
-          ],
-        },
-        {
-          account: "eosio.token",
-          name: "transfer",
-          data: {
-            from: "limitlessbnk",
-            to: "limitlesscpu",
-            quantity: realCost.toFixed(8) + " WAX",
-            memo: "Limitlesswax CPU Payment",
-          },
-          authorization: [
-            {
-              actor: "limitlesswax",
-              permission: "cosign",
-            },
-          ],
-        },
+        // {
+        //   account: "limitlesswax",
+        //   name: "paycpu",
+        //   data: {
+        //     user: ual.activeUser.accountName,
+        //     info: multiplier + " ms max",
+        //   },
+        //   authorization: [
+        //     {
+        //       actor: "limitlesswax",
+        //       permission: "cosign",
+        //     },
+        //   ],
+        // },
+        // {
+        //   account: "eosio.token",
+        //   name: "transfer",
+        //   data: {
+        //     from: "limitlessbnk",
+        //     to: "limitlesscpu",
+        //     quantity: realCost.toFixed(8) + " WAX",
+        //     memo: "Limitlesswax CPU Payment",
+        //   },
+        //   authorization: [
+        //     {
+        //       actor: "limitlesswax",
+        //       permission: "cosign",
+        //     },
+        //   ],
+        // },
         {
           account: "eosio",
           name: "buyrambytes",

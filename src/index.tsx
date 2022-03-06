@@ -6,8 +6,8 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 // @ts-ignore
 import { UALProvider, withUAL } from "ual-reactjs-renderer";
-import { Anchor } from "ual-anchor";
-// import { Anchor } from "../node_modules/@deraxyna/ual-anchor/node_modules/eosjs/dist";
+// import { Anchor } from "ual-anchor";
+import { Anchor } from "../node_modules/@deraxyna/ual-anchor/dist";
 
 import { Wax } from "../node_modules/@deraxyna/ual-wax/dist";
 

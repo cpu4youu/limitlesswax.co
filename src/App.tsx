@@ -17,7 +17,7 @@ function App({ ual }) {
         <Route path='/' element={<Home ual = { ual} />} /> 
         <Route path='/about' element={<About />} /> 
         <Route path='/account' element={<Account ual = { ual }/>} /> 
-        <Route path='/cpu4' element={<Cpu4 />} /> 
+        <Route path='/cpu4' element={<Cpu4 ual= { ual }/>} /> 
         <Route path='/limitlesswax' element={<Limitlesswax />} /> 
         <Route path='/team' element={<Team />} /> 
         <Route path='*' element={<Home ual = { ual }/>} /> 

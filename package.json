@@ -1,40 +1,34 @@
 {
-  "name": "main-site",
+  "name": "frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@deraxyna/ual-anchor": "git+https://github.com/deraXyna/ual-anchor.git",
-    "@deraxyna/ual-wax": "git+https://github.com/deraXyna/ual-wax.git",
-    "@eosdacio/ual-wax": "^1.5.1",
+    "@emotion/react": "^11.8.1",
+    "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "^5.5.0",
+    "@mui/material": "^5.5.0",
+    "@mui/styles": "^5.5.0",
     "@testing-library/jest-dom": "^5.16.2",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "cors": "^2.8.5",
-    "eosio-signing-request": "^2.4.0",
-    "git": "^0.1.5",
-    "node-fetch": "^2.6.7",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-icons": "^4.3.1",
-    "react-router-dom": "^6.2.2",
-    "react-scripts": "4.0.3",
-    "semantic-ui-react": "^2.1.2",
-    "styled-components": "^5.3.3",
-    "typescript": "^4.6.2",
-    "ual-anchor": "git+https://github.com/deraXyna/ual-anchor.git",
-    "ual-ledger": "^0.3.0",
-    "ual-reactjs-renderer": "^0.3.1",
-    "util": "^0.12.4",
-    "web-vitals": "^1.0.1",
-    "zlib": "^1.0.5"
+    "react-redux": "^7.2.6",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^4.0.3",
+    "react-slick": "^0.28.1",
+    "redux": "^4.1.2",
+    "redux-thunk": "^2.4.1",
+    "slick-carousel": "^1.8.1",
+    "web-vitals": "^2.1.4",
+    "web3": "^1.7.1"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "rm -fr docs && react-scripts build && mv build docs && cp CNAME docs",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:4000",
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -52,9 +46,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@types/node-fetch": "^3.0.3",
-    "@types/react": "^17.0.39"
   }
 }

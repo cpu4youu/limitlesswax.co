@@ -184,14 +184,14 @@ const Cpu4sale = ({ ual }) => {
       setMultiDayFee(MultiDayFee)
       setExponent(exponent)
       //var Multiplier: number = (1.0 -(LoanedWAX / TotalWAX)) ** exponent * 100
-      var Multiplier: number = Math.pow(1.0 - LoanedWAX / TotalWAX, Exponent)  * 300
-      if(Multiplier < 10.0){
-        Multiplier = 10.0
+      var Multiplier: number = Math.pow(1.0 - LoanedWAX / TotalWAX, Exponent)  *  MAX_FEE_RATE
+      if(Multiplier < MIN_FEE_RATE){
+        Multiplier = MIN_FEE_RATE
       }
       setMultiplier(Multiplier)
       const Daily = calculatedStakedWAX(Multiplier, MultiDayFee,1,1)
       const Weekly = calculatedStakedWAX(Multiplier, MultiDayFee,7,7)
-      const Monthly = calculatedStakedWAX(Multiplier, MultiDayFee,31,31)
+      const Monthly = calculatedStakedWAX(Multiplier, MultiDayFee,14,14)
       setDaily(Daily)
       setWeekly(Weekly)
       setMonthly(Monthly)
@@ -1485,7 +1485,7 @@ const Cpu4sale = ({ ual }) => {
               mb: "10px",
             }}
           >
-            Month = 31 WAX
+            2 Weeks = 14 WAX
           </Typography>
           <Typography
             sx={{

@@ -60,6 +60,7 @@ const Account = ({ ual }) => {
   useEffect(() => {
     if(!startdelay){
       setUser(ual.activeUser.accountName)
+      console.log(ual.activeUser)
     }
 
   },[startdelay])

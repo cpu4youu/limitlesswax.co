@@ -44,7 +44,7 @@ function App({ ual }) {
             <Route path="/about-us" component={AboutUs} />
             <Route path="/account" component={() => auth() ? (<Account ual = {ual}/>) : (<Error ual = {ual}/>)}/>
             <Route path="/cpu4sale" component={() => auth() ? (<Cpu4sale ual = {ual}/>) : (<Error ual = {ual}/>)}/>
-            <Route path="/limitlesswax" component={Limitlesswax} />
+            <Route path="/limitlesswax" component={() => auth() ? (<Limitlesswax ual = {ual}/>) : (<Error ual = {ual}/>)}/>
             <Route path="*" component={() => <Error ual = {ual}/>} />
           </Switch>
           <Footer />

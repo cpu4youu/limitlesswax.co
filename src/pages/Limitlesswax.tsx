@@ -45,6 +45,18 @@ const useStyles = makeStyles((theme) => ({
       fontSize: "24px",
       lineHeight: "28px",
     },
+  },
+  data: {
+    fontWeight: "200",
+    fontSize: "40px",
+    lineHeight: "50px",
+    color: "#EDEDED",
+    marginBottom: "10px",
+    overflowWrap:'break-word',
+    "@media (min-width: 900px)": {
+      fontSize: "18px",
+      lineHeight: "28px",
+    },
   }
 }));
 //@ts-expect-error
@@ -53,7 +65,6 @@ const Limitlesswax = ({ ual }) => {
   const [addActionOpen, setAddActionOpen] = useState<boolean>(false);
   const [actionName, setActionName] = useState<string>('')
   const [actionData, setActionData] = useState<object[]>([]);
-  const [accountsNames, setAccountNames] = useState<string[]>([])
   const [account, setAccount] = useState<string>()
   const [userResults, setUserResults] = useState<object[]>([]);
   const [getQuery, setQuery] = useState<string>()
@@ -64,6 +75,10 @@ const Limitlesswax = ({ ual }) => {
   const [fields, setFields] = useState<object[]>()
   const [data, setData] = useState<object[]>([{},{},{},{},{},{},{},{},{}])
   const [actions, setActions] = useState<object[]>([])
+
+  const [transactionms, setTransactionms] = useState<number>(2)
+  const [mult_Fee, setMult_Fee] = useState<number>(0)
+  const [fee, setFee]  = useState<number>(0)
 
   const [timer, setTimer] = useState<number>(0)
 
@@ -95,24 +110,147 @@ const Limitlesswax = ({ ual }) => {
     
   },[actionString])
 
-  useEffect(() => {
-   
-    if(fields !== undefined) {
-       //@ts-ignore
-      console.log(fields)
-    }
-  },[fields])
 
   useEffect(()=>{
-    console.log(actions)
+    var x: object[] = []
+    actions.map((value) =>{
+      //@ts-ignore
+      if(value.account !== ""){
+        //@ts-ignore
+        x.push({account: value.account, name: value.name, data: value.data})
+      }
+    })
+    setActionData(x)
+    
   }, [actions])
+
+  useEffect(()=>{
+    if(mult_Fee !== 0){
+      setFee(mult_Fee * transactionms)
+    }
+  }, [transactionms])
+
+  useEffect(() => {
+    async function getFee() {
+      const response = await rpc.get_table_rows({
+        json: true, // Get the response as json
+        code: "limitlesswax", // Contract that we target
+        scope: "limitlesswax", // Account that owns the data
+        table: "config", // Table name
+        reverse: false, // Optional: Get reversed data
+      })
+      var WAX = response.rows[0].cost
+      WAX = parseFloat(WAX.slice(0, -4))
+      setMult_Fee(WAX)
+      setFee(WAX)
+    }
+    getFee()
+  }, [])
+
+  const payWithWax = () => {
+
+    async function sign(transaction:any){
+      try {
+        const r = await ual.activeUser.signTransaction(transaction, {
+          blocksBehind: 5,
+          expireSeconds: 300,
+          broadcast: true,
+          sign: true,
+        });
+        console.log(r);
+        alert("Transaction ID: " + r.transactionId);
+      } catch (e) {
+        console.error(e);
+        // process.exit();
+        alert(e);
+        console.log(JSON.stringify(e));
+      }
+    }
+
+    var rdy_actions: object[] = [
+      {
+        account: "limitlesswax",
+        name: "paycpu",
+        data: {
+          user: ual.activeUser.accountName,
+          info: `${transactionms} ms max`,
+        },
+        authorization: [
+          {
+            actor: "limitlesswax",
+            permission: "cosign",
+          }
+        ]
+      },
+      {
+        account: "eosio.token",
+        name: "transfer",
+        data: {
+          from: ual.activeUser.accountName,
+          to: "limitlesscpu",
+          quantity: fee + "000000 WAX",
+          memo: `${transactionms} ms`
+        },
+        authorization: [
+          {
+            actor: ual.activeUser.accountName,
+            permission: "active",
+          },
+        ],
+      }
+    ]
+    actions.map((value) =>{
+      //@ts-ignore
+      var action = {
+        //@ts-ignore
+        account: value.account, 
+        //@ts-ignore
+        name: value.name, 
+        //@ts-ignore
+        data: value.data, 
+        authorization: [{
+          actor: ual.activeUser.accountName,
+          permission: ual.activeUser.requestPermission
+        }]}
+      rdy_actions.push(action)
+    })
+    const transaction = {
+      max_cpu_usage_ms: transactionms,
+      max_net_usage_words: transactionms * 1000,
+      actions: rdy_actions
+    }
+
+    console.log(transaction)
+    sign(transaction)
+    
+    
+  }
+
+  const reset = () => {
+    resetActionSelector()
+    setTransactionms(2)
+    setLastQuery('')
+    setActionData([])
+    setAccount(undefined)
+  }
+
+  const resetActionSelector = () => {
+    setFinishedAction(true)
+    setAccount(undefined)
+    setAccountActions([])
+    setData([{},{},{},{},{},{},{},{},{}])
+    setFields(undefined)
+    setActionString(undefined)
+  }
 
   const submitAction = () => {
     var datas = {}
     var empty:boolean = false
     data.map((value, index) => {
       if(empty){
-
+        var action = {account: account, name : actionString, data:  {}}
+        setActions([...actions, action])
+        setTransactionms(transactionms +1)
       } else{
         //@ts-ignore
         if(value.name === undefined &&  index === 0){
@@ -129,8 +267,15 @@ const Limitlesswax = ({ ual }) => {
     if(!empty){
       var action = {account: account, name : actionString, data:  datas}
       setActions([...actions, action])
+      setTransactionms(transactionms +1)
     }
     resetActionSelector()
+  }
+
+  const removeAction = (index:number) =>{
+    var arr = [...actions]
+    arr.splice(index, 1)
+    setActions(arr)
   }
 
   const addActionParams = (name:string, value: string, index: number) => {
@@ -171,14 +316,7 @@ const Limitlesswax = ({ ual }) => {
     setActionData((actionData) => [...actionData, {account: "", name: "", data: "" }]);
   };
 
-  const resetActionSelector = () => {
-    setFinishedAction(true)
-    setAccount(undefined)
-    setAccountActions([])
-    setData([{},{},{},{},{},{},{},{},{}])
-    setFields(undefined)
-    setActionString(undefined)
-  }
+
 
   const startActionSelector = () => {
     setFinishedAction(false)
@@ -370,46 +508,82 @@ const Limitlesswax = ({ ual }) => {
                 defaultValue={''}
               />
             </Box>
-            {actionData.map((data, key) => (
-              <Box
-                key={key}
+            <Box>
+              <Typography 
+                className={classes.label}
                 sx={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  justifyContent: "space-between",
-                  mb: "20px",
+                  p:'5px 0px 10px'
                 }}
-              >
+                >
+                  Actions
+              </Typography>
+              {actionData.map((data, key) => (
                 <Box
+                  key={key}
                   sx={{
-                    width: { xs: "100%", md: "calc(50% - 25px)" },
-                    mb: { xs: "20px", md: 0 },
+                    display: "flex",
+                    flexWrap: "wrap",
+                    justifyContent: "space-between",
+                    mb: "20px",
+                    p: '0 4rem'
                   }}
                 >
-
-                  {!accountsNames[key] ? (
-                    <>
-                      <Typography className={classes.label}>
-                        Account #{key + 1}
-                      </Typography>
-                    </>
-                   
-                  ):(
-                   <>
-                    <Box>
-                      <Typography className={classes.label}>
-                          Account #{key + 1}
-                      </Typography>
-                      <Typography className={classes.label}>
-                        {accountsNames[key]}
-                      </Typography>
+                  <Box
+                    sx={{
+                      display: "grid",
+                      gridTemplateColumns: 'repeat(4, 1fr)',
+                      gridAutoColumns: '400px 100px',
+                      gap: '10px',
+                      flexDirection: { xs: "column", sm: "row" },
+                      justifyItems: 'start',
+                      justifyContent: 'flex-start',
+                      mb: "10px",
                       
-                    </Box>
-                   </> 
-                  )}
+                    }}
+                  >
+                    <Typography
+                      className={classes.label}
+                    >
+                      {//@ts-ignore
+                        data.account}
+                    </Typography>
+                    <Typography
+                      className={classes.label}
+                    >
+                      {//@ts-ignore
+                        data.name}
+                    </Typography>
+                    <Typography 
+                      className={classes.data}
+                      sx={{
+                        fontWeight: "200",
+                        fontSize: "20px",
+                        width: '500px'
+                      }}
+                    >
+                      {//@ts-ignore
+                        JSON.stringify(data.data, undefined,  2)}
+                    </Typography>
+                    <Button
+                      onClick={() => (removeAction(key))}
+                      sx={{
+                        background: "#831F3F",
+                        border: "1px solid #FFFFFF",
+                        fontWeight: "700",
+                        fontSize: "12px",
+                        lineHeight: "21px",
+                        color: "#EDEDED",
+                        textTransform: "capitalize",
+                        p: "9px 15px",
+                      }}
+                     >
+                       Remove Action
+                     </Button>
+                  </Box>
                 </Box>
-              </Box>
-            ))}
+              ))}
+            </Box>
+            
             {finishedAction ? (
               <Button
               variant="outlined"
@@ -535,8 +709,7 @@ const Limitlesswax = ({ ual }) => {
                         }}
                       >
                           {//@ts-ignore
-                            fields.fields.map((value, key) =>  (
-                              
+                            fields.fields.map((value, key) =>  ( 
                               <Box
                                 key={key}
                                 sx={{
@@ -568,6 +741,7 @@ const Limitlesswax = ({ ual }) => {
                                   className={classes.textInput}
                                   style={{ width: "400px" }}
                                   onChange={e => addActionParams(value.name, e.target.value, key)}
+                                  defaultValue={''}
                                 />
                                 <Typography
                                   sx={{
@@ -650,7 +824,7 @@ const Limitlesswax = ({ ual }) => {
                 }}
               >
                 <Typography className={classes.label}>
-                  Name this action
+                  CPU requested in ms
                 </Typography>
                 <Box
                   sx={{
@@ -659,9 +833,12 @@ const Limitlesswax = ({ ual }) => {
                   }}
                 >
                   <input
-                    type="text"
+                    type="number"
                     className={classes.textInput}
                     style={{ width: "84px" }}
+                    onChange={e => setTransactionms(parseInt(e.target.value))}
+                    value={transactionms}
+                    
                   />
                   <Typography
                     sx={{
@@ -673,6 +850,18 @@ const Limitlesswax = ({ ual }) => {
                     }}
                   >
                     ms
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontWeight: "700",
+                      fontSize: { xs: "18px", md: "24px" },
+                      lineHeight: { xs: "24px", md: "28px" },
+                      color: "#EDEDED",
+                      ml: "10px",
+                      p: '0px 10px '
+                    }}
+                  >
+                    {`${fee} WAX`}
                   </Typography>
                 </Box>
               </Box>
@@ -686,6 +875,7 @@ const Limitlesswax = ({ ual }) => {
                 >
                   <Button
                     variant="contained"
+                    onClick={payWithWax}
                     sx={{
                       width: 82,
                       height: 47,
@@ -707,6 +897,7 @@ const Limitlesswax = ({ ual }) => {
                   </Typography>
                   <Button
                     variant="outlined"
+                    onClick={payWithWax}
                     sx={{
                       border: "2px dashed #A6A6A6!important",
                       p: "9px 15px",
@@ -717,7 +908,7 @@ const Limitlesswax = ({ ual }) => {
                       textTransform: "capitalize",
                     }}
                   >
-                    Add Action +
+                    Coming Soon!
                   </Button>
                 </Box>
               </Box>
@@ -736,6 +927,7 @@ const Limitlesswax = ({ ual }) => {
                   p: "10px 24px",
                   mr: "20px",
                 }}
+                onClick={reset}
               >
                 Reset
               </Button>
@@ -754,7 +946,7 @@ const Limitlesswax = ({ ual }) => {
                   mr: "20px",
                 }}
               >
-                Submit
+                Back
               </Button>
             </Box>
           </Box>

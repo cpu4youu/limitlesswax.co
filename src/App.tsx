@@ -1,11 +1,5 @@
 import { Fragment } from "react";
-// import {
-//   BrowserRouter as Router,
-//   Switch,
-//   Route,
-//   Redirect,
-// } from "react-router-dom";
-import { Route, Redirect, Switch } from 'react-router-dom';
+import { Switch, Route, Redirect, HashRouter } from "react-router-dom";
 import { Box } from "@mui/material";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -28,7 +22,7 @@ function App() {
           overflow: "hidden",
         }}
       >
-        {/* <Router> */}
+        <HashRouter>
           <Header />
           <Switch>
             <Route path="/landing" component={Landing} />
@@ -40,7 +34,7 @@ function App() {
             <Route path="*" component={Error} />
           </Switch>
           <Footer />
-        {/* </Router> */}
+        </HashRouter>
       </Box>
     </Fragment>
   );

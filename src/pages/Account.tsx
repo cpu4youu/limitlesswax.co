@@ -118,7 +118,7 @@ const Account = () => {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          mb: { xs: '24px', md: "50px" },
+          mb: { xs: "24px", md: "50px" },
         }}
       >
         <Typography
@@ -174,7 +174,7 @@ const Account = () => {
                 background: "#4A1E2A",
                 boxShadow: "10px 10px 5px rgba(0, 0, 0, 0.15)",
                 borderRadius: "30px",
-                p: { xs: '20px', md: "38px 30px" },
+                p: { xs: "20px", md: "38px 30px" },
                 mb: { xs: "20px", sm: 0 },
               }}
             >
@@ -184,7 +184,7 @@ const Account = () => {
                   fontSize: { xs: "20px", md: "28px" },
                   lineHeight: { xs: "30px", md: "38px" },
                   color: "#EBEBEB",
-                  mb: { xs: '24px', md: "50px" },
+                  mb: { xs: "24px", md: "50px" },
                 }}
               >
                 Requested CPU for self total:
@@ -261,7 +261,7 @@ const Account = () => {
                 background: "#4A1E2A",
                 boxShadow: "10px 10px 5px rgba(0, 0, 0, 0.15)",
                 borderRadius: "30px",
-                p: { xs: '20px', md: "38px 30px" },
+                p: { xs: "20px", md: "38px 30px" },
                 mb: { xs: "20px", sm: 0 },
               }}
             >
@@ -271,7 +271,7 @@ const Account = () => {
                   fontSize: { xs: "20px", md: "28px" },
                   lineHeight: { xs: "30px", md: "38px" },
                   color: "#EBEBEB",
-                  mb: { xs: '24px', md: "50px" },
+                  mb: { xs: "24px", md: "50px" },
                 }}
               >
                 Requested CPU for self total:
@@ -293,7 +293,7 @@ const Account = () => {
                 background: "#4A1E2A",
                 boxShadow: "10px 10px 5px rgba(0, 0, 0, 0.15)",
                 borderRadius: "30px",
-                p: { xs: '20px', md: "38px 30px" },
+                p: { xs: "20px", md: "38px 30px" },
               }}
             >
               <Typography
@@ -302,7 +302,7 @@ const Account = () => {
                   fontSize: { xs: "20px", md: "28px" },
                   lineHeight: { xs: "30px", md: "38px" },
                   color: "#EBEBEB",
-                  mb: { xs: '24px', md: "50px" },
+                  mb: { xs: "24px", md: "50px" },
                 }}
               >
                 Deposited WAX to earn:

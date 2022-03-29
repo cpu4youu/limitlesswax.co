@@ -286,7 +286,7 @@ const Limitlesswax = ({ ual }) => {
 
   const getActionfromABI = (account: string, name: string) => {
     if(account !== ""){
-      fetch("https://wax.eosdetroit.io/v1/chain/get_abi", {
+      fetch("https://wax.cryptolions.io/v1/chain/get_abi", {
         "headers": {
           "accept": "*/*",
           "accept-language": "nl-NL,nl;q=0.9,en-US;q=0.8,en;q=0.7",

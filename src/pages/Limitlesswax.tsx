@@ -10,7 +10,7 @@ const sleep = (milliseconds: number) => {
 }
 const { JsonRpc } = require('eosjs');
 
-const httpEndpoint = "http://wax.greymass.com/";
+const httpEndpoint = "https://wax.greymass.com/";
 const rpc = new JsonRpc(httpEndpoint);
 
 const useStyles = makeStyles((theme) => ({

@@ -393,7 +393,7 @@ const Limitlesswax = ({ ual }) => {
   function getABI(input: string): Array<string> {
     var action_names: string[] = []
     if(input !== ""){
-      fetch("http://wax.cryptolions.io/v1/chain/get_abi", {
+      fetch("https://wax.cryptolions.io/v1/chain/get_abi", {
         "headers": {
           "accept": "*/*",
           "accept-language": "nl-NL,nl;q=0.9,en-US;q=0.8,en;q=0.7",

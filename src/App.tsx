@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import {
-  BrowserRouter as Router,
+  HashRouter,
   Switch,
   Route,
   Redirect,
@@ -36,7 +36,7 @@ function App({ ual }) {
           overflow: "hidden",
         }}
       >
-        <Router>
+        <HashRouter>
           <Header ual = { ual }/>
           <Switch>
             <Route path="/landing" component={Landing} />
@@ -48,7 +48,7 @@ function App({ ual }) {
             <Route path="*" component={() => <Error ual = {ual}/>} />
           </Switch>
           <Footer />
-        </Router>
+        </HashRouter>
       </Box>
     </Fragment>
   );

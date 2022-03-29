@@ -286,13 +286,13 @@ const Limitlesswax = ({ ual }) => {
 
   const getActionfromABI = (account: string, name: string) => {
     if(account !== ""){
-      fetch("https://testnet.wax.eosdetroit.io/v1/chain/get_abi", {
+      fetch("https://wax.eosdetroit.io/v1/chain/get_abi", {
         "headers": {
           "accept": "*/*",
           "accept-language": "nl-NL,nl;q=0.9,en-US;q=0.8,en;q=0.7",
           "content-type": "text/plain;charset=UTF-8",
         },
-        "referrer": "https://wax-test.bloks.io/",
+        "referrer": "https://wax.bloks.io/",
         "body": `{\"account_name\": \"${account}\"}`,
         "method": "POST",
         "mode": "cors",
@@ -393,13 +393,13 @@ const Limitlesswax = ({ ual }) => {
   function getABI(input: string): Array<string> {
     var action_names: string[] = []
     if(input !== ""){
-      fetch("https://testnet.wax.eosdetroit.io/v1/chain/get_abi", {
+      fetch("http://wax.cryptolions.io/v1/chain/get_abi", {
         "headers": {
           "accept": "*/*",
           "accept-language": "nl-NL,nl;q=0.9,en-US;q=0.8,en;q=0.7",
           "content-type": "text/plain;charset=UTF-8",
         },
-        "referrer": "https://wax-test.bloks.io/",
+        "referrer": "https://wax.bloks.io/",
         "body": `{\"account_name\": \"${input}\"}`,
         "method": "POST",
         "mode": "cors",

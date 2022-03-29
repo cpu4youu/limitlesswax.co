@@ -83,13 +83,13 @@ export default function Footer() {
               mr: { xs: "30px", sm: "80px", md: "100px" },
             }}
           >
-            <Link href="/landing" underline="none" className={classes.menuList}>
+            <Link href="/#/landing" underline="none" className={classes.menuList}>
               Home
             </Link>
-            <Link href="/about-us" underline="none" className={classes.menuList}>
+            <Link href="/#/about-us" underline="none" className={classes.menuList}>
               About Us
             </Link>
-            <Link href="/account" underline="none" className={classes.menuList}>
+            <Link href="/#/account" underline="none" className={classes.menuList}>
               Account
             </Link>
           </Box>
@@ -98,13 +98,13 @@ export default function Footer() {
               mr: { xs: "30px", sm: "80px", md: "100px" },
             }}
           >
-            <Link href="/cpu4sale" underline="none" className={classes.menuList}>
+            <Link href="/#/cpu4sale" underline="none" className={classes.menuList}>
               Cpu4sale
             </Link>
-            <Link href="/limitlesswax" underline="none" className={classes.menuList}>
+            <Link href="/#/limitlesswax" underline="none" className={classes.menuList}>
               LimitlessWAX
             </Link>
-            <Link href="/privacy" underline="none" className={classes.menuList}>
+            <Link href="/#/privacy" underline="none" className={classes.menuList}>
               Privacy
             </Link>
           </Box>
@@ -119,7 +119,7 @@ export default function Footer() {
             <Link href="https://discord.gg/UJzBuRa9sY" target="_blank" underline="none" className={classes.menuList}>
               Discord
             </Link>
-            <Link href="/terms" underline="none" className={classes.menuList}>
+            <Link href="/#/terms" underline="none" className={classes.menuList}>
               Terms
             </Link>
           </Box>

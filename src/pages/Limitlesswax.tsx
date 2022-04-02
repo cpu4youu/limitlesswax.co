@@ -1,9 +1,31 @@
-import { useEffect, useState } from "react";
-import { Box, Container, Button, Typography } from "@mui/material";
+import {useEffect, useState } from "react";
+import { 
+  Box, 
+  Container, 
+  Button, 
+  Typography, 
+  TextField, 
+  Collapse, 
+  IconButton, 
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import TextField from '@mui/material/TextField';
+import ClearIcon from '@mui/icons-material/Clear';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import Autocomplete from '@mui/material/Autocomplete';
-import * as _ from 'lodash'
+import * as _ from 'lodash';
+import Cookies from 'universal-cookie';
+
+
+const cookies = new Cookies();
 
 const sleep = (milliseconds: number) => {
   return new Promise(resolve => setTimeout(resolve, milliseconds))
@@ -12,6 +34,18 @@ const { JsonRpc } = require('eosjs');
 
 const httpEndpoint = "https://wax.greymass.com/";
 const rpc = new JsonRpc(httpEndpoint);
+
+const columnsTable = ['Transaction ID', 'Actions']
+
+
+interface TableEntry{
+  id: string,
+  requested_cpu: number,
+  payment:  string,
+  amount_actions: number,
+  actions: Array<any>
+
+}
 
 const useStyles = makeStyles((theme) => ({
   textInput: {
@@ -40,7 +74,6 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: "50px",
     color: "#EDEDED",
     marginBottom: "10px",
-    textDecoration: 'underline',
     "@media (min-width: 900px)": {
       fontSize: "24px",
       lineHeight: "28px",
@@ -75,13 +108,16 @@ const Limitlesswax = ({ ual }) => {
   const [fields, setFields] = useState<object[]>()
   const [data, setData] = useState<object[]>([{},{},{},{},{},{},{},{},{}])
   const [actions, setActions] = useState<object[]>([])
-
+  const [open, setOpen]  = useState<boolean[]>([])
   const [transactionms, setTransactionms] = useState<number>(2)
   const [mult_Fee, setMult_Fee] = useState<number>(0)
   const [fee, setFee]  = useState<number>(0)
 
+  const [transactions, setTransactions] = useState<TableEntry[]>([])
+
   const [timer, setTimer] = useState<number>(0)
 
+ 
   useEffect(() =>{
     if(getQuery && getQuery.length > 2){
       getUserFromBC(getQuery)
@@ -92,6 +128,7 @@ const Limitlesswax = ({ ual }) => {
   useEffect(() => {
     if(account !== undefined){
       const Actions: string[] = getABI(account)
+
       setAccountActions(Actions)
     }
   },[account])
@@ -131,6 +168,26 @@ const Limitlesswax = ({ ual }) => {
   }, [transactionms])
 
   useEffect(() => {
+    var states: any = []
+    if(transactions.length > 5){
+      var  arr = transactions.slice(0, 5)
+      setTransactions(arr)
+    } else {
+      if(transactions  !== [] && transactions.length !== 0){
+        cookies.set('Transactions', JSON.stringify(transactions), { path: '/' })
+        localStorage.setItem('Transactions', JSON.stringify(transactions))
+      }
+      transactions.map((value) => {
+        states.push(false)
+      })
+      setOpen(states)
+    }
+
+    
+   
+  },[transactions])
+
+  useEffect(() => {
     async function getFee() {
       const response = await rpc.get_table_rows({
         json: true, // Get the response as json
@@ -145,11 +202,21 @@ const Limitlesswax = ({ ual }) => {
       setFee(WAX)
     }
     getFee()
+    console.log('cookie')
+    //setTransactions(cookies.get('Transactions'))
+    if(localStorage.getItem('Transactions')){
+      //@ts-ignore
+      setTransactions(JSON.parse(localStorage.getItem('Transactions')))
+    }
   }, [])
+
+  const getTransaction = (key: number) => {
+
+  }
 
   const payWithWax = () => {
 
-    async function sign(transaction:any){
+    async function sign(transaction:any, payment: string, amount: number){
       try {
         const r = await ual.activeUser.signTransaction(transaction, {
           blocksBehind: 5,
@@ -159,6 +226,14 @@ const Limitlesswax = ({ ual }) => {
         });
         console.log(r);
         alert("Transaction ID: " + r.transactionId);
+        const result = {
+          id: r.transactionId,
+          requested_cpu: transactionms,
+          payment:  payment,
+          amount_actions: amount,
+          actions: transaction.actions
+        }
+        setTransactions([result, ...transactions ]) 
       } catch (e) {
         console.error(e);
         // process.exit();
@@ -166,7 +241,7 @@ const Limitlesswax = ({ ual }) => {
         console.log(JSON.stringify(e));
       }
     }
-
+    var amount = 2
     var rdy_actions: object[] = [
       {
         account: "limitlesswax",
@@ -212,6 +287,7 @@ const Limitlesswax = ({ ual }) => {
           actor: ual.activeUser.accountName,
           permission: ual.activeUser.requestPermission
         }]}
+      amount = amount + 1
       rdy_actions.push(action)
     })
     const transaction = {
@@ -221,7 +297,7 @@ const Limitlesswax = ({ ual }) => {
     }
 
     console.log(transaction)
-    sign(transaction)
+    sign(transaction, fee + "000000 WAX", amount)
     
     
   }
@@ -300,8 +376,10 @@ const Limitlesswax = ({ ual }) => {
         })
         .then(response => response.json())
         .then(data => data.abi.structs)
-        .then(actions => actions.map((value:any) =>{
+        .then(actions => 
+          actions.map((value:any) =>{
           if(value.name === name){
+
             setFields(value)
             return
           }
@@ -311,12 +389,6 @@ const Limitlesswax = ({ ual }) => {
         })
     }
   }
-
-  const addActionData = (account:string) => {
-    setActionData((actionData) => [...actionData, {account: "", name: "", data: "" }]);
-  };
-
-
 
   const startActionSelector = () => {
     setFinishedAction(false)
@@ -408,6 +480,7 @@ const Limitlesswax = ({ ual }) => {
         .then(response => response.json())
         .then(data => data.abi.actions)
         .then(action => {
+
           action.map((item:any) => {
             action_names.push(item.name)
           })
@@ -421,6 +494,117 @@ const Limitlesswax = ({ ual }) => {
       return ['No Actions Fround']
     }
   }
+
+  function redoTransaction(index:number){
+
+    async function sign(transaction:any, payment: string, amount: number, cpu: number){
+      try {
+        const r = await ual.activeUser.signTransaction(transaction, {
+          blocksBehind: 5,
+          expireSeconds: 300,
+          broadcast: true,
+          sign: true,
+        });
+
+        console.log(r);
+
+        alert("Transaction ID: " + r.transactionId);
+        const result = {
+          id: r.transactionId,
+          requested_cpu: cpu,
+          payment:  payment,
+          amount_actions: amount,
+          actions: transaction.actions
+        }
+        setTransactions([result, ...transactions ]) 
+      } catch (e) {
+        console.error(e);
+        // process.exit();
+        alert(e);
+        console.log(JSON.stringify(e));
+      }
+    }
+    
+    
+    const transaction = {
+      max_cpu_usage_ms: transactions[index]['requested_cpu'],
+      max_net_usage_words: transactions[index]['requested_cpu'] * 1000,
+      actions: transactions[index]['actions']
+    }
+
+    console.log(transaction)
+    sign(transaction, transactions[index]['payment'], transactions[index]['amount_actions'],transactions[index]['requested_cpu'])
+    
+    
+  }
+
+  function Row(input: any){
+    //@ts-nocheck
+    var row = input.row
+    var actions = row.actions
+    var id = input.index
+    function setBoolean(val: boolean){
+      var values = open
+      values[id] = val
+      setOpen(values)
+    }
+    return(
+      <>
+      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+        <TableCell>
+          <IconButton onClick={() => (redoTransaction(id))}>
+            <CheckCircleOutlineIcon sx={{color: '#006200 '}}/>
+          </IconButton> 
+        </TableCell>
+        <TableCell>
+          <IconButton
+            aria-label="expand row"
+            size="small"
+            onClick={() => setBoolean(!open[id])}
+          >
+            {open[id] ? <KeyboardArrowUpIcon sx= {{color: "#EDEDED",}}/> : <KeyboardArrowDownIcon sx= {{color: "#EDEDED",}}/>}
+          </IconButton>
+        </TableCell>
+        <TableCell component="th" scope="row" sx= {{color: "#EDEDED",}}>
+          {row.id}
+        </TableCell>
+        <TableCell align="center" sx= {{color: "#EDEDED",}}>{row.requested_cpu}</TableCell>
+        <TableCell align="center" sx= {{color: "#EDEDED",}}>{row.payment}</TableCell>
+        <TableCell align="center" sx= {{color: "#EDEDED",}}>{row.amount_actions}</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+          <Collapse in={open[id]} timeout="auto" unmountOnExit>
+            <Box sx={{ margin: 1 }}>
+              <Table size="small" aria-label="purchases">
+                <TableHead>
+                  <TableRow>
+                    <TableCell sx= {{color: "#EDEDED",}}>Action Nr.</TableCell>
+                    <TableCell sx= {{color: "#EDEDED",}}>Account</TableCell>
+                    <TableCell align="center" sx= {{color: "#EDEDED",}}>Name</TableCell>
+                    <TableCell align="center" sx= {{color: "#EDEDED",}}>Data</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {actions.map((action: any, index2: any) => (
+                    <TableRow key={index2}>
+                      <TableCell align="center" sx= {{color: "#EDEDED",}}>{index2}</TableCell>
+                      <TableCell align="center" sx= {{color: "#EDEDED",}}>{action.account}</TableCell>
+                      <TableCell align="center" sx= {{color: "#EDEDED",}}>{action.name}</TableCell>
+                      <TableCell align="left" sx= {{color: "#EDEDED",}}>{JSON.stringify(action.data)}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </Box>
+          </Collapse>
+        </TableCell>
+      </TableRow>
+    </>
+    )
+  }
+
+
 
   return (
     <Container
@@ -497,7 +681,7 @@ const Limitlesswax = ({ ual }) => {
                 mb: "20px",
               }}
             >
-              <Typography className={classes.label}>
+              {/* <Typography className={classes.label}>
                 Name this Transaction
               </Typography>
               <input
@@ -506,7 +690,8 @@ const Limitlesswax = ({ ual }) => {
                 style={{ width: "100%" }}
                 onChange={e =>  setActionName(e.target.value)}
                 defaultValue={''}
-              />
+                placeholder={'Name for Saving...'}
+              /> */}
             </Box>
             <Box>
               <Typography 
@@ -517,71 +702,47 @@ const Limitlesswax = ({ ual }) => {
                 >
                   Actions
               </Typography>
-              {actionData.map((data, key) => (
-                <Box
-                  key={key}
-                  sx={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    justifyContent: "space-between",
-                    mb: "20px",
-                    p: '0 4rem'
-                  }}
-                >
-                  <Box
-                    sx={{
-                      display: "grid",
-                      gridTemplateColumns: 'repeat(4, 1fr)',
-                      gridAutoColumns: '400px 100px',
-                      gap: '10px',
-                      flexDirection: { xs: "column", sm: "row" },
-                      justifyItems: 'start',
-                      justifyContent: 'flex-start',
-                      mb: "10px",
-                      
-                    }}
-                  >
-                    <Typography
-                      className={classes.label}
-                    >
-                      {//@ts-ignore
-                        data.account}
-                    </Typography>
-                    <Typography
-                      className={classes.label}
-                    >
-                      {//@ts-ignore
-                        data.name}
-                    </Typography>
-                    <Typography 
-                      className={classes.data}
-                      sx={{
-                        fontWeight: "200",
-                        fontSize: "20px",
-                        width: '500px'
-                      }}
-                    >
-                      {//@ts-ignore
-                        JSON.stringify(data.data, undefined,  2)}
-                    </Typography>
-                    <Button
-                      onClick={() => (removeAction(key))}
-                      sx={{
-                        background: "#831F3F",
-                        border: "1px solid #FFFFFF",
-                        fontWeight: "700",
-                        fontSize: "12px",
-                        lineHeight: "21px",
-                        color: "#EDEDED",
-                        textTransform: "capitalize",
-                        p: "9px 15px",
-                      }}
-                     >
-                       Remove Action
-                     </Button>
-                  </Box>
-                </Box>
-              ))}
+              <Box
+                sx={{
+                  background: "#831F3F",
+                  boxShadow: "10px 10px 5px rgba(0, 0, 0, 0.15)",
+                  mt: '20px',
+                  mb: '50px',
+                  mx: '20px',
+                }}
+              >
+                <TableContainer component={Paper} sx={{background:'#33151D'}}>
+                  <Table sx ={{ minWidth: 650, }} size='small'>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell align="center" sx= {{color: "#EDEDED", width: '160px'}}>Account</TableCell>
+                        <TableCell align="center" sx= {{color: "#EDEDED", width: '160px'}}>Name</TableCell>
+                        <TableCell align="center" sx= {{color: "#EDEDED",}}>Data</TableCell>
+                        <TableCell align="center" sx= {{color: "#EDEDED", width: '160px'}}>Remove Action</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {actionData.map((data, key) =>(
+                        <TableRow key={key}>
+                          <TableCell align="center" sx= {{color: "#EDEDED",}}>{ //@ts-ignore
+                                                                                data.account}</TableCell>
+                          <TableCell align="center" sx= {{color: "#EDEDED",}}>{//@ts-ignore
+                                                                                data.name}</TableCell>
+                          <TableCell align="center" sx= {{color: "#EDEDED",}}>{//@ts-ignore
+                                                                                JSON.stringify(data.data)}</TableCell>
+                          <TableCell align="center" sx= {{color: "#EDEDED",}}>
+                            {
+                                <IconButton onClick={() => (removeAction(key))}>
+                                  <ClearIcon sx={{color: '#831F3F'}}/>
+                                </IconButton>
+                              }
+                          </TableCell>
+                      </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Box>
             </Box>
             
             {finishedAction ? (
@@ -609,7 +770,7 @@ const Limitlesswax = ({ ual }) => {
                     flexDirection: { xs: "column", sm: "row" },
                     alignItems: { xs: "flex-start", sm: "center" },
                     justifyContent: "space-between",
-                    mb: "20px",
+                    m: '10px',
                   }}
                 > {account !== undefined ? (
                   <>
@@ -650,6 +811,7 @@ const Limitlesswax = ({ ual }) => {
                       gap: 1,
                       flexDirection: { xs: "column", sm: "row" },
                       alignItems: { xs: "flex-start", sm: "center" },
+                      mt: "25px",
                       mb: "20px",
                       flexWrap: 'wrap',
                       alignContent: 'baseline',       
@@ -742,6 +904,10 @@ const Limitlesswax = ({ ual }) => {
                                   style={{ width: "400px" }}
                                   onChange={e => addActionParams(value.name, e.target.value, key)}
                                   defaultValue={''}
+                                  placeholder={value.type === 'name' ? ('Enter account name...') : 
+                                              (value.type === 'asset' ? ('0.0000 SYMBOL') : 
+                                              (value.type === 'symbol' ? ('Enter SYMBOL (e.g. WAX)') : 
+                                              ('Enter string....')))}
                                 />
                                 <Typography
                                   sx={{
@@ -949,7 +1115,38 @@ const Limitlesswax = ({ ual }) => {
                 Back
               </Button>
             </Box>
+            <Box
+              sx={{
+                background: "#831F3F",
+                boxShadow: "10px 10px 5px rgba(0, 0, 0, 0.15)",
+                mt: '50px',
+                mx: '20px',  
+              }}
+            >
+                <TableContainer component={Paper} sx={{background:'#33151D'}}>
+                  <Table sx ={{ minWidth: 650, }} size='small'>
+                    <TableHead>
+                      <TableRow>
+                      <TableCell sx= {{color: "#EDEDED",}}>Redo Transaction</TableCell>
+                        <TableCell sx= {{color: "#EDEDED",}}>Show Actions</TableCell>
+                        <TableCell sx= {{color: "#EDEDED",}}>Transaction ID</TableCell>
+                        <TableCell sx= {{color: "#EDEDED",}}>Requested CPU</TableCell>
+                        <TableCell sx= {{color: "#EDEDED",}}>Payment</TableCell>
+                        <TableCell sx= {{color: "#EDEDED",}}>Action Amount</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {transactions.map((row, key)=>(
+                        <Row row={row} index={key} key={key}/>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+            </Box>
           </Box>
+          
+
+
         ) : (
           <Box>
             <Typography
@@ -1050,3 +1247,6 @@ const Limitlesswax = ({ ual }) => {
 };
 
 export default Limitlesswax;
+
+
+

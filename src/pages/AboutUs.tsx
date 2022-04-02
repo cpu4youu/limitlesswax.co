@@ -3,19 +3,60 @@ import { Box, Container, Button, Typography } from "@mui/material";
 import Slider from "react-slick";
 import RectAngleBg from "../assets/images/Rectangle2.png";
 import SliderImage from "../assets/images/slider-image.png";
-import User2 from "../assets/images/degen.png";
+import izay from "../assets/images/izay.png"
+import deraxyna from "../assets/images/deraxyna.png"
+import kuro from "../assets/images/kuro.png"
+import degen from "../assets/images/degen.png";
+import vaaan from "../assets/images/vaaan.png"
+import crypto from "../assets/images/cryptolions.png"
+import kyle from "../assets/images/kyle.png"
 
 const userLists = [
   {
-    name: "Vaaaan",
+    image: izay,
+    name: "Izay",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Augue etiam auctor massa etiam.",
+      "Founder / Smart Contract Dev",
   },
   {
-    image: User2,
+    image: deraxyna,
+    name: "deraXyna",
+    description: "Backend / Web Dev",
+  },
+  { 
+    image: kuro,
+    name: 'kuro',
+    description: 'Dev / Marketing',
+  }
+
+]
+
+
+
+const userLists2 = [
+  {
+    image: degen,
     name: "Meliso",
     description: "Blockchain & Web developer",
   },
+  {
+    image: vaaan,
+    name: "Vaaaan",
+    description:
+      "Original Backer, Avid Wax Blockchain Enthusiast",
+  },
+  {   
+    image: crypto,
+    name: "CryptoLions",
+    description:
+      "Smart Contract Auditor",
+    
+  },
+  {
+    image: kyle,
+    name: "Kyle",
+    description: 'Web Designer'
+  }
 ];
 
 const AboutUs = () => {
@@ -97,7 +138,7 @@ const AboutUs = () => {
               mb: "20px",
             }}
           >
-            The price is dynamically set between a 1% and 10% fee and it changes
+            The price is dynamically set between a 0.5% and 2% fee and it changes
             everytime someone
             <span style={{ wordBreak: "break-all" }}>
               {" "}
@@ -178,6 +219,20 @@ const AboutUs = () => {
             Join Community
           </Button>
         </Box>
+        <Typography
+            sx={{
+              fontWeight: "700",
+              fontSize: { xs: "30px", md: "50px" },
+              lineHeight: { xs: "28px", md: "42px" },
+              textAlign: "center",
+              color: "#EFEFEF",
+              mr: { sm: "20px" },
+              mb: { xs: "20px", sm: "0" },
+              p: '0px 0px 50px'
+            }}
+          >
+            Team
+          </Typography>
         <Box
           sx={{
             display: "flex",
@@ -186,6 +241,7 @@ const AboutUs = () => {
             justifyContent: "space-around",
           }}
         >
+          
           {userLists.map((item, key) => (
             <Box
               key={key}
@@ -246,13 +302,98 @@ const AboutUs = () => {
             </Box>
           ))}
         </Box>
+        <Typography
+            sx={{
+              fontWeight: "700",
+              fontSize: { xs: "30px", md: "50px" },
+              lineHeight: { xs: "28px", md: "42px" },
+              textAlign: "center",
+              color: "#EFEFEF",
+              mr: { sm: "20px" },
+              mb: { xs: "20px", sm: "0" },
+              p: '50px 0px 50px'
+            }}
+          >
+              Contributors
+          </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", sm: "row" },
+            alignItems: { xs: "center", sm: "flex-start" },
+            justifyContent: "space-around",
+            gap: '50px'
+          }}
+        >
+
+        {userLists2.map((item, key) => (
+            <Box
+              key={key}
+              sx={{
+                maxWidth: "220px",
+                mb: { xs: "20px", sm: "0" },
+              }}
+            >
+              {item?.image ? (
+                <Box
+                  component="img"
+                  src={item?.image}
+                  sx={{
+                    display: "block",
+                    borderRadius: "50%",
+                    width: { xs: "125px", md: "150px" },
+                    aspectRatio: "1",
+                    mx: "auto",
+                    mb: "20px",
+                  }}
+                />
+              ) : (
+                <Box
+                  sx={{
+                    backgroundColor: "#8C243F",
+                    borderRadius: "50%",
+                    width: { xs: "125px", md: "150px" },
+                    aspectRatio: "1",
+                    mx: "auto",
+                    mb: "20px",
+                  }}
+                ></Box>
+              )}
+
+              <Typography
+                sx={{
+                  fontWeight: "500",
+                  fontSize: { xs: "36px", md: "40px" },
+                  lineHeight: { xs: "36px", md: "48px" },
+                  textAlign: "center",
+                  color: "#F7F7F7",
+                  mb: "20px",
+                }}
+              >
+                {item.name}
+              </Typography>
+              <Typography
+                sx={{
+                  fontWeight: "400",
+                  fontSize: { xs: "18px", md: "20px" },
+                  lineHeight: "28px",
+                  textAlign: "center",
+                  color: "#EDEDED",
+                }}
+              >
+                {item.description}
+              </Typography>
+            </Box>
+          ))}
+
+        </Box>
       </Container>
       <Box
         sx={{
           pb: { xs: "40px", md: "100px" },
         }}
       >
-        <Typography
+        {/* <Typography
           sx={{
             fontWeight: "700",
             fontSize: { xs: "28px", md: "36px" },
@@ -270,7 +411,7 @@ const AboutUs = () => {
               <Box component="img" src={SliderImage} sx={{ width: 174 }} />
             </Box>
           ))}
-        </Slider>
+        </Slider> */}
       </Box>
     </Fragment>
   );

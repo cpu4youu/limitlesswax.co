@@ -643,7 +643,7 @@ const Limitlesswax = ({ ual }) => {
                 LimitlessWAX
               </Typography>
               <Box>
-                <Button
+                {/* <Button
                   variant="contained"
                   onClick={() => setAddActionOpen(false)}
                   sx={{
@@ -672,7 +672,7 @@ const Limitlesswax = ({ ual }) => {
                   }}
                 >
                   Load
-                </Button>
+                </Button> */}
               </Box>
             </Box>
             <Box

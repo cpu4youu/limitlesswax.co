@@ -95,7 +95,7 @@ const useStyles = makeStyles((theme) => ({
 //@ts-expect-error
 const Limitlesswax = ({ ual }) => {
   const classes = useStyles();
-  const [addActionOpen, setAddActionOpen] = useState<boolean>(false);
+  const [addActionOpen, setAddActionOpen] = useState<boolean>(true);
   const [actionName, setActionName] = useState<string>('')
   const [actionData, setActionData] = useState<object[]>([]);
   const [account, setAccount] = useState<string>()

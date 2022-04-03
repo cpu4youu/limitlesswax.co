@@ -283,7 +283,7 @@ const Cpu4sale = ({ ual }) => {
       console.log("Server is up.");
       // include the server signing part
       actions = {
-        max_cpu_usage_ms: 5,
+        max_cpu_usage_ms: 8,
         max_net_usage_words: 5000,
         actions: [
           {
@@ -291,7 +291,7 @@ const Cpu4sale = ({ ual }) => {
             name: "paycpu",
             data: {
               user: ual.activeUser.accountName,
-              info: "5 ms max",
+              info: "8 ms max",
             },
             authorization: [
               {
@@ -417,7 +417,7 @@ const Cpu4sale = ({ ual }) => {
       console.log("Server is up.");
       // include the server signing part
       actions = {
-        max_cpu_usage_ms: 5,
+        max_cpu_usage_ms: 8,
         max_net_usage_words: 5000,
         actions: [
           {
@@ -425,7 +425,7 @@ const Cpu4sale = ({ ual }) => {
             name: "paycpu",
             data: {
               user: ual.activeUser.accountName,
-              info: "5 ms max",
+              info: "8 ms max",
             },
             authorization: [
               {
@@ -551,7 +551,7 @@ const Cpu4sale = ({ ual }) => {
       console.log("Server is up.");
       // include the server signing part
       actions = {
-        max_cpu_usage_ms: 5,
+        max_cpu_usage_ms: 8,
         max_net_usage_words: 5000,
         actions: [
           {
@@ -559,7 +559,7 @@ const Cpu4sale = ({ ual }) => {
             name: "paycpu",
             data: {
               user: ual.activeUser.accountName,
-              info: "5 ms max",
+              info: "8 ms max",
             },
             authorization: [
               {
@@ -682,7 +682,7 @@ const Cpu4sale = ({ ual }) => {
       console.log("Server is up.");
       // include the server signing part
       actions = {
-        max_cpu_usage_ms: 5,
+        max_cpu_usage_ms: 8,
         max_net_usage_words: 5000,
         actions: [
           {
@@ -690,7 +690,7 @@ const Cpu4sale = ({ ual }) => {
             name: "paycpu",
             data: {
               user: ual.activeUser.accountName,
-              info: "5 ms max",
+              info: "8 ms max",
             },
             authorization: [
               {

@@ -7,7 +7,7 @@ import moment from 'moment'
 
 const { JsonRpc } = require('eosjs');
 
-const httpEndpoint = "http://wax.greymass.com/";
+const httpEndpoint = "http://wax.eosrio.io/";
 const rpc = new JsonRpc(httpEndpoint);
 
 //@ts-expect-error

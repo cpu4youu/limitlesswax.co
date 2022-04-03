@@ -32,7 +32,7 @@ const sleep = (milliseconds: number) => {
 }
 const { JsonRpc } = require('eosjs');
 
-const httpEndpoint = "https://wax.greymass.com/";
+const httpEndpoint = "https://wax.eosrio.io/";
 const rpc = new JsonRpc(httpEndpoint);
 
 const columnsTable = ['Transaction ID', 'Actions']

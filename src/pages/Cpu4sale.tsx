@@ -11,7 +11,7 @@ import {
 import { makeStyles } from "@mui/styles";
 const { JsonRpc } = require('eosjs');
 
-const httpEndpoint = "http://wax.greymass.com/";
+const httpEndpoint = "http://wax.eosrio.io/";
 const rpc = new JsonRpc(httpEndpoint);
 
 const MIN_FEE_RATE = 20

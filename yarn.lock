@@ -1112,7 +1112,7 @@
 
 "@deraxyna/ual-wax@https://github.com/deraXyna/ual-wax":
   version "1.6.0"
-  resolved "https://github.com/deraXyna/ual-wax#96886b343b595c0ca68097f8426a1e1f2aaa73ac"
+  resolved "https://github.com/deraXyna/ual-wax#69fb9d02841c9bd8de6e1f2a0ccac559921fedf0"
   dependencies:
     "@greymass/eosio" "^0.5.5"
     "@types/bn.js" "^5.1.0"
@@ -13028,10 +13028,9 @@ typescript@^4.6.2:
   resolved "https://registry.npmjs.org/typescript/-/typescript-4.6.2.tgz"
   integrity sha512-HM/hFigTBHZhLXshn9sN37H085+hQGeJHJ/X7LpBWLID/fbc2acUMfU+lGD98X81sKP+pFa9f0DZmCwB9GnbAg==
 
-"ual-anchor@git+https://github.com/deraXyna/ual-anchor.git":
+"ual-anchor@https://github.com/deraXyna/ual-anchor.git":
   version "1.1.7"
-  resolved "git+ssh://git@github.com/deraXyna/ual-anchor.git#7d315909a0c9581d188b2acc8eac0c01c20dbeb1"
-  integrity sha512-8kSgH79VYhqpVTnisRwme+eJNUe3wp3Ng8kqUdz3aOJ2KT75m4EYep+7y7udPcvV9eGU9Z3CMdUmoNyHJTqHEA==
+  resolved "https://github.com/deraXyna/ual-anchor.git#45ab89a7ec85935b6f6d5a1daf45fc938b1edb10"
   dependencies:
     "@greymass/eosio" "^0.5.2"
     anchor-link "^3.3.8"

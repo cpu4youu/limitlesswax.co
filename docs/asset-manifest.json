@@ -5,13 +5,13 @@
     "main.js.map": "/static/js/main.af4793ad.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.858251dd.js",
     "runtime-main.js.map": "/static/js/runtime-main.858251dd.js.map",
-    "static/js/2.50b04ab7.chunk.js": "/static/js/2.50b04ab7.chunk.js",
-    "static/js/2.50b04ab7.chunk.js.map": "/static/js/2.50b04ab7.chunk.js.map",
+    "static/js/2.74d0164d.chunk.js": "/static/js/2.74d0164d.chunk.js",
+    "static/js/2.74d0164d.chunk.js.map": "/static/js/2.74d0164d.chunk.js.map",
     "static/js/3.4f31d6b2.chunk.js": "/static/js/3.4f31d6b2.chunk.js",
     "static/js/3.4f31d6b2.chunk.js.map": "/static/js/3.4f31d6b2.chunk.js.map",
     "index.html": "/index.html",
     "static/css/main.7c592017.chunk.css.map": "/static/css/main.7c592017.chunk.css.map",
-    "static/js/2.50b04ab7.chunk.js.LICENSE.txt": "/static/js/2.50b04ab7.chunk.js.LICENSE.txt",
+    "static/js/2.74d0164d.chunk.js.LICENSE.txt": "/static/js/2.74d0164d.chunk.js.LICENSE.txt",
     "static/media/Rectangle.b6cb2fab.png": "/static/media/Rectangle.b6cb2fab.png",
     "static/media/Rectangle2.73bb09d6.png": "/static/media/Rectangle2.73bb09d6.png",
     "static/media/cryptolions.4c9eeeae.png": "/static/media/cryptolions.4c9eeeae.png",
@@ -26,7 +26,7 @@
   },
   "entrypoints": [
     "static/js/runtime-main.858251dd.js",
-    "static/js/2.50b04ab7.chunk.js",
+    "static/js/2.74d0164d.chunk.js",
     "static/css/main.7c592017.chunk.css",
     "static/js/main.af4793ad.chunk.js"
   ]

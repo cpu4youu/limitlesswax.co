@@ -1112,7 +1112,7 @@
 
 "@deraxyna/ual-wax@https://github.com/deraXyna/ual-wax":
   version "1.6.0"
-  resolved "https://github.com/deraXyna/ual-wax#69fb9d02841c9bd8de6e1f2a0ccac559921fedf0"
+  resolved "https://github.com/deraXyna/ual-wax#0951bb8b538fcf79dc6ba928b95f2dcfb90cad37"
   dependencies:
     "@greymass/eosio" "^0.5.5"
     "@types/bn.js" "^5.1.0"

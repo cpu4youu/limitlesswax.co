@@ -134,7 +134,7 @@ const Limitlesswax = ({ ual }) => {
   },[account])
 
   useEffect(() => {
-    const interval = setInterval(()=> setTimer(Date.now()), 100);
+    const interval = setInterval(()=> setTimer(Date.now()), 10000);
     return () =>{
       clearInterval(interval)
     }

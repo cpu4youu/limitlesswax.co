@@ -244,12 +244,9 @@ const Limitlesswax = ({ ual }) => {
     var amount = 2
     var rdy_actions: object[] = [
       {
-        account: "limitlesswax",
-        name: "paycpu",
-        data: {
-          user: ual.activeUser.accountName,
-          info: `${transactionms} ms max`,
-        },
+        account: "boost.wax",
+        name: "noop",
+        data: {},
         authorization: [
           {
             actor: "limitlesswax",
@@ -257,22 +254,6 @@ const Limitlesswax = ({ ual }) => {
           }
         ]
       },
-      {
-        account: "eosio.token",
-        name: "transfer",
-        data: {
-          from: ual.activeUser.accountName,
-          to: "limitlesscpu",
-          quantity: fee + "000000 WAX",
-          memo: `${transactionms} ms`
-        },
-        authorization: [
-          {
-            actor: ual.activeUser.accountName,
-            permission: "active",
-          },
-        ],
-      }
     ]
     actions.map((value) =>{
       //@ts-ignore
@@ -296,6 +277,24 @@ const Limitlesswax = ({ ual }) => {
       actions: rdy_actions
     }
 
+    rdy_actions.push(
+      {
+        account: "eosio.token",
+        name: "transfer",
+        data: {
+          from: ual.activeUser.accountName,
+          to: "limitlesscpu",
+          quantity: fee + "000000 WAX",
+          memo: `${transactionms} ms`
+        },
+        authorization: [
+          {
+            actor: ual.activeUser.accountName,
+            permission: "active",
+          },
+        ],
+      }
+    )
     console.log(transaction)
     sign(transaction, fee + "000000 WAX", amount)
     

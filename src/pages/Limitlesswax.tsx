@@ -23,6 +23,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import Autocomplete from '@mui/material/Autocomplete';
 import * as _ from 'lodash';
 import Cookies from 'universal-cookie';
+import { parseInt } from "lodash";
 
 
 const cookies = new Cookies();
@@ -138,6 +139,7 @@ const Limitlesswax = ({ ual }) => {
     return () =>{
       clearInterval(interval)
     }
+    
   }, [timer])
 
   useEffect(() => {
@@ -333,14 +335,20 @@ const Limitlesswax = ({ ual }) => {
           empty = true
         }
         //@ts-ignore
-        if(value.name !== undefined){
+        if(value.name !== undefined && value.name !== 'asset_ids'){
           //@ts-ignore
           datas[value.name] = value.value
+        }
+        //@ts-ignore
+        if(value.name !== undefined && value.name === 'asset_ids'){
+          //@ts-ignore
+          datas[value.name] = JSON.parse(value.value)
         }
       }
     })
     if(!empty){
       var action = {account: account, name : actionString, data:  datas}
+      console.log(action)
       setActions([...actions, action])
       setTransactionms(transactionms +1)
     }
@@ -898,7 +906,7 @@ const Limitlesswax = ({ ual }) => {
                                   {value.name}
                                 </Typography>
                                 <input
-                                  type="text"
+                                  type='text'
                                   className={classes.textInput}
                                   style={{ width: "400px" }}
                                   onChange={e => addActionParams(value.name, e.target.value, key)}
@@ -906,7 +914,8 @@ const Limitlesswax = ({ ual }) => {
                                   placeholder={value.type === 'name' ? ('Enter account name...') : 
                                               (value.type === 'asset' ? ('0.0000 SYMBOL') : 
                                               (value.type === 'symbol' ? ('Enter SYMBOL (e.g. WAX)') : 
-                                              ('Enter string....')))}
+                                              (value.type === 'uint64[]' ? ('Enter uint64[] (e.g. ["123,"123"]') :
+                                              ('Enter string....'))))}
                                 />
                                 <Typography
                                   sx={{

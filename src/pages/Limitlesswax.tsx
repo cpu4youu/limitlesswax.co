@@ -340,7 +340,7 @@ const Limitlesswax = ({ ual }) => {
           datas[value.name] = value.value
         }
         //@ts-ignore
-        if(value.name !== undefined && value.name === 'asset_ids'){
+        if(value.name !== undefined && (value.name === 'asset_ids' || value.name === 'quantities')){
           //@ts-ignore
           datas[value.name] = JSON.parse(value.value)
         }
@@ -914,8 +914,9 @@ const Limitlesswax = ({ ual }) => {
                                   placeholder={value.type === 'name' ? ('Enter account name...') : 
                                               (value.type === 'asset' ? ('0.0000 SYMBOL') : 
                                               (value.type === 'symbol' ? ('Enter SYMBOL (e.g. WAX)') : 
-                                              (value.type === 'uint64[]' ? ('Enter uint64[] (e.g. ["123,"123"]') :
-                                              ('Enter string....'))))}
+                                              (value.type === 'uint64[]' ? ('Enter uint64[] (e.g. ["123","123"]') :
+                                              (value.type === 'asset[]' ? ('Enter asset[] (e.g. ["123 FWF","123 TLM"]') :
+                                              ('Enter string....')))))}
                                 />
                                 <Typography
                                   sx={{

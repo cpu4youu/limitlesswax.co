@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/static/css/main.7c592017.chunk.css",
+    "main.js": "/static/js/main.0b975f4f.chunk.js",
+    "main.js.map": "/static/js/main.0b975f4f.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.858251dd.js",
+    "runtime-main.js.map": "/static/js/runtime-main.858251dd.js.map",
+    "static/js/2.2efa7ddb.chunk.js": "/static/js/2.2efa7ddb.chunk.js",
+    "static/js/2.2efa7ddb.chunk.js.map": "/static/js/2.2efa7ddb.chunk.js.map",
+    "static/js/3.4f31d6b2.chunk.js": "/static/js/3.4f31d6b2.chunk.js",
+    "static/js/3.4f31d6b2.chunk.js.map": "/static/js/3.4f31d6b2.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.7c592017.chunk.css.map": "/static/css/main.7c592017.chunk.css.map",
+    "static/js/2.2efa7ddb.chunk.js.LICENSE.txt": "/static/js/2.2efa7ddb.chunk.js.LICENSE.txt",
+    "static/media/Rectangle.b6cb2fab.png": "/static/media/Rectangle.b6cb2fab.png",
+    "static/media/Rectangle2.73bb09d6.png": "/static/media/Rectangle2.73bb09d6.png",
+    "static/media/cryptolions.4c9eeeae.png": "/static/media/cryptolions.4c9eeeae.png",
+    "static/media/degen.2470f2ea.png": "/static/media/degen.2470f2ea.png",
+    "static/media/deraxyna.9d2f1ccd.png": "/static/media/deraxyna.9d2f1ccd.png",
+    "static/media/izay.4052176b.png": "/static/media/izay.4052176b.png",
+    "static/media/kuro.c38cc99e.png": "/static/media/kuro.c38cc99e.png",
+    "static/media/kyle.25c66875.png": "/static/media/kyle.25c66875.png",
+    "static/media/side1.b0f53c8f.svg": "/static/media/side1.b0f53c8f.svg",
+    "static/media/side2_1.09737553.png": "/static/media/side2_1.09737553.png",
+    "static/media/vaaan.3481f41d.png": "/static/media/vaaan.3481f41d.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.858251dd.js",
+    "static/js/2.2efa7ddb.chunk.js",
+    "static/css/main.7c592017.chunk.css",
+    "static/js/main.0b975f4f.chunk.js"
+  ]
+}

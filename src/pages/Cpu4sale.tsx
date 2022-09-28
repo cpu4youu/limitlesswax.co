@@ -14,8 +14,8 @@ const { JsonRpc } = require('eosjs');
 const httpEndpoint = "https://wax.greymass.com/";
 const rpc = new JsonRpc(httpEndpoint);
 
-const MIN_FEE_RATE = 20
-const MAX_FEE_RATE = 300
+const MIN_FEE_RATE = 200
+const MAX_FEE_RATE = 850
 
 const useStyles = makeStyles((theme) => ({
   textInput: {
@@ -130,7 +130,7 @@ const Cpu4sale = ({ ual }) => {
 
     if(timer >= Math.floor(Date.now()/1000)){
       getConfig()
-    } 
+    }
     return () =>{
       clearInterval(interval)
     }
